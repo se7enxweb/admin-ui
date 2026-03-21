@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\AdminUi\UI\Dataset;
 
-use Ibexa\AdminUi\UI\Value as UIValue;
+use Ibexa\AdminUi\UI\Value\ObjectState\ObjectState;
 use Ibexa\AdminUi\UI\Value\ValueFactory;
 use Ibexa\Contracts\Core\Repository\ObjectStateService;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
@@ -16,7 +16,7 @@ use Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroup;
 
 final class ObjectStatesDataset
 {
-    /** @var UIValue\ObjectState\ObjectState[] */
+    /** @var \Ibexa\AdminUi\UI\Value\ObjectState\ObjectState[] */
     private array $data;
 
     public function __construct(
@@ -28,7 +28,7 @@ final class ObjectStatesDataset
     public function load(ContentInfo $contentInfo): self
     {
         $data = array_map(
-            function (ObjectStateGroup $objectStateGroup) use ($contentInfo) {
+            function (ObjectStateGroup $objectStateGroup) use ($contentInfo): ObjectState|array {
                 $hasObjectStates = !empty($this->objectStateService->loadObjectStates($objectStateGroup));
                 if (!$hasObjectStates) {
                     return [];
@@ -46,7 +46,7 @@ final class ObjectStatesDataset
     }
 
     /**
-     * @return UIValue\ObjectState\ObjectState[]
+     * @return \Ibexa\AdminUi\UI\Value\ObjectState\ObjectState[]
      */
     public function getObjectStates(): array
     {

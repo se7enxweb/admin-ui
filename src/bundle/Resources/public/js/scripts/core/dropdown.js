@@ -60,6 +60,12 @@
             this.itemTemplate = this.itemsListContainer.dataset.template;
             this.sourceOptionsObserver = new MutationObserver((mutationsList) => {
                 if (this.hasChangedOptions(mutationsList)) {
+                    const optionsCount = this.sourceInput.querySelectorAll('option').length;
+
+                    if (optionsCount && !this.itemsPopover) {
+                        this.initializeDropdownUI();
+                    }
+
                     this.recreateOptions();
                 }
             });
@@ -91,6 +97,7 @@
             this.itemsPopoverContent = this.itemsPopoverContent.bind(this);
             this.onSourceFocus = this.onSourceFocus.bind(this);
             this.onSourceBlur = this.onSourceBlur.bind(this);
+            this.initializeDropdownUI = this.initializeDropdownUI.bind(this);
 
             ibexa.helpers.objectInstances.setInstance(this.container, this);
         }
@@ -182,25 +189,37 @@
             return this.onSelect(optionToSelect, true);
         }
 
-        onSelect(element, selected) {
-            const { choiceIcon } = element.dataset;
-            const value = JSON.stringify(String(element.dataset.value));
+        getValueFromElement(element, isJSONValue = true) {
+            const value = String(element.dataset.value);
 
-            if (this.canSelectOnlyOne && selected) {
-                this.hideOptions();
-                this.clearCurrentSelection(false);
+            if (!isJSONValue) {
+                return value;
             }
+
+            return JSON.stringify(String(element.dataset.value));
+        }
+
+        onSelectSetSourceInputState(element, selected) {
+            const value = this.getValueFromElement(element);
 
             if (value) {
                 this.sourceInput.querySelector(`[value=${value}]`).selected = selected;
+            }
+        }
 
-                if (!this.canSelectOnlyOne) {
-                    element.querySelector('.ibexa-input').checked = selected;
-                }
+        onSelectSetItemsListState(element, selected) {
+            const value = this.getValueFromElement(element);
+
+            if (value && !this.canSelectOnlyOne) {
+                element.querySelector('.ibexa-input').checked = selected;
             }
 
             this.itemsListContainer.querySelector(`[data-value=${value}]`).classList.toggle('ibexa-dropdown__item--selected', selected);
+        }
 
+        onSelectSetSelectionInfoState(element, selected) {
+            const { choiceIcon } = element.dataset;
+            const value = this.getValueFromElement(element);
             const selectedItemsList = this.container.querySelector('.ibexa-dropdown__selection-info');
 
             if (selected) {
@@ -218,12 +237,28 @@
             }
 
             this.fitItems();
+        }
+
+        onSelectSetCurrentSelectedValueState(element) {
+            const value = this.getValueFromElement(element);
 
             if (this.currentSelectedValue !== value || !this.canSelectOnlyOne) {
                 this.fireValueChangedEvent();
 
                 this.currentSelectedValue = value;
             }
+        }
+
+        onSelect(element, selected) {
+            if (this.canSelectOnlyOne && selected) {
+                this.hideOptions();
+                this.clearCurrentSelection(false);
+            }
+
+            this.onSelectSetSourceInputState(element, selected);
+            this.onSelectSetItemsListState(element, selected);
+            this.onSelectSetSelectionInfoState(element, selected);
+            this.onSelectSetCurrentSelectedValueState(element, selected);
         }
 
         onInteractionOutside(event) {
@@ -291,6 +326,13 @@
 
             this.fitItems();
             this.fireValueChangedEvent();
+        }
+
+        deselectOptionByValue(value) {
+            const stringifiedValue = JSON.stringify(String(value));
+            const optionToDeselect = this.itemsListContainer.querySelector(`.ibexa-dropdown__item[data-value=${stringifiedValue}]`);
+
+            return this.deselectOption(optionToDeselect);
         }
 
         fitItems() {
@@ -495,21 +537,8 @@
             this.selectionTogglerBtn.innerHTML = label;
         }
 
-        init() {
-            if (this.container.dataset.initialized) {
-                console.warn('Dropdown has already been initialized!');
-
-                return;
-            }
-
-            this.container.dataset.initialized = true;
-
-            this.sourceInput.addEventListener('focus', this.onSourceFocus, false);
-            this.sourceInput.addEventListener('blur', this.onSourceBlur, false);
-
-            const optionsCount = this.container.querySelectorAll('.ibexa-dropdown__source option').length;
-
-            if (!optionsCount) {
+        initializeDropdownUI() {
+            if (this.itemsPopover) {
                 return;
             }
 
@@ -526,7 +555,7 @@
             );
             this.itemsPopover._element.removeAttribute('title');
 
-            if (this.isDynamic) {
+            if (this.isDynamic && this.canSelectOnlyOne) {
                 this.selectFirstOption();
             }
 
@@ -575,7 +604,19 @@
                 this.itemsFilterInput.addEventListener('keyup', this.filterItems, false);
                 this.itemsFilterInput.addEventListener('input', this.filterItems, false);
             }
+        }
 
+        init() {
+            if (this.container.dataset.initialized) {
+                console.warn('Dropdown has already been initialized!');
+
+                return;
+            }
+
+            this.container.dataset.initialized = true;
+
+            this.sourceInput.addEventListener('focus', this.onSourceFocus, false);
+            this.sourceInput.addEventListener('blur', this.onSourceBlur, false);
             this.sourceOptionsObserver.observe(this.sourceInput, {
                 childList: true,
             });
@@ -584,6 +625,14 @@
                 attributeFilter: ['class'],
             });
             this.resizeObserver.observe(this.container);
+
+            const optionsCount = this.container.querySelectorAll('.ibexa-dropdown__source option').length;
+
+            if (!optionsCount) {
+                return;
+            }
+
+            this.initializeDropdownUI();
 
             const selectedItems = this.container.querySelectorAll(
                 '.ibexa-dropdown__selected-item:not(.ibexa-dropdown__selected-overflow-number):not(.ibexa-dropdown__selected-placeholder)',

@@ -4,6 +4,7 @@
     "type": "project",
     "description": "Ibexa Admin Ui",
     "replace": {
+	"ibexa/admin-ui": "*",
         "ezsystems/ezplatform-admin-ui": "*"
     },
     "autoload": {

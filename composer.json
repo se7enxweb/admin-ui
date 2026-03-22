@@ -1,6 +1,6 @@
 {
-    "name": "ibexa/admin-ui",
-    "license": "(GPL-2.0-only or proprietary)",
+    "name": "se7enxweb/admin-ui",
+    "license": "(GPL-2.0-or-later or proprietary)",
     "type": "project",
     "description": "Ibexa Admin Ui",
     "replace": {

@@ -1,9 +1,10 @@
 {
-    "name": "ibexa/admin-ui",
-    "license": "GPL-2.0-only",
+    "name": "se7enxweb/admin-ui",
+    "license": "GPL-2.0-or-later",
     "type": "project",
-    "description": "Ibexa Admin Ui",
+    "description": "Exponential Platform Admin Ui",
     "replace": {
+        "ibexa/admin-ui": "*",
         "ezsystems/ezplatform-admin-ui": "*"
     },
     "autoload": {

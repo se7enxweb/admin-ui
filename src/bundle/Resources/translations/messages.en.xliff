@@ -77,8 +77,8 @@
         <note>key: base.get_started</note>
       </trans-unit>
       <trans-unit id="c82a33e6a2272aab44ff7b78c90817c0fc8768cb" resname="base.need_assistance">
-        <source>Get to know Ibexa DXP</source>
-        <target state="new">Get to know Ibexa DXP</target>
+        <source>Get to know Exponential Platform DXP</source>
+        <target state="new">Get to know Exponential Platform DXP</target>
         <note>key: base.need_assistance</note>
       </trans-unit>
       <trans-unit id="2db35ee6d4dcf83edd936a8a8a6baabd1e4ffd76" resname="base.registration">
@@ -92,8 +92,8 @@
         <note>key: base.visit_support</note>
       </trans-unit>
       <trans-unit id="59c7ae16de21fe5b4f16ac740a708e72fff4654a" resname="base.welcome">
-        <source><![CDATA[Welcome to<br/> Ibexa DXP]]></source>
-        <target state="new"><![CDATA[Welcome to<br/> Ibexa DXP]]></target>
+        <source><![CDATA[Welcome to<br/> Exponential Platform DXP]]></source>
+        <target state="new"><![CDATA[Welcome to<br/> Exponential Platform DXP]]></target>
         <note>key: base.welcome</note>
       </trans-unit>
       <trans-unit id="d21d07085caa55b0fee2fc054a6878bbdb24ae78" resname="breadcrumb.admin">
@@ -312,8 +312,8 @@
         <note>key: ezplatform.reset_user_password.link_is_not_valid</note>
       </trans-unit>
       <trans-unit id="5149c594d64197e519d38a1a2e7368140716bb81" resname="ezplatform.reset_user_password.success">
-        <source><![CDATA[Your password has been changed. You can <a href="%login%">log in</a> to Ibexa DXP.]]></source>
-        <target state="new"><![CDATA[Your password has been changed. You can <a href="%login%">log in</a> to Ibexa DXP.]]></target>
+        <source><![CDATA[Your password has been changed. You can <a href="%login%">log in</a> to Exponential Platform DXP.]]></source>
+        <target state="new"><![CDATA[Your password has been changed. You can <a href="%login%">log in</a> to Exponential Platform DXP.]]></target>
         <note>key: ezplatform.reset_user_password.success</note>
       </trans-unit>
       <trans-unit id="bd5ae6bdfe2b60c317c3b47f27c5bf5a264b71ba" resname="fieldview.toggler.hide">

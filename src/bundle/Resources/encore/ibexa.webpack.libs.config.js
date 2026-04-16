@@ -5,7 +5,7 @@ Encore.reset();
 Encore.setOutputPath('public/assets/react/build')
     .setPublicPath('/assets/react/build')
     .addAliases({
-        '@ibexa-admin-ui-assets': path.resolve('./vendor/ibexa/admin-ui-assets'),
+        '@ibexa-admin-ui-assets': path.resolve('./vendor/se7enxweb/admin-ui-assets'),
     })
     .enableSassLoader()
     .disableSingleRuntimeChunk();
@@ -23,7 +23,7 @@ Encore.setOutputPath('public/assets/react-dom/build')
         react: 'React',
     })
     .addAliases({
-        '@ibexa-admin-ui-assets': path.resolve('./vendor/ibexa/admin-ui-assets'),
+        '@ibexa-admin-ui-assets': path.resolve('./vendor/se7enxweb/admin-ui-assets'),
     })
     .enableSassLoader()
     .disableSingleRuntimeChunk();

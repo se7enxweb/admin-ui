@@ -163,7 +163,7 @@ module.exports = (Encore) => {
             path.resolve(__dirname, '../public/js/scripts/sidebar/btn/user.edit.js'),
             path.resolve(__dirname, '../public/js/scripts/sidebar/btn/location.create.js'),
             path.resolve(__dirname, '../public/js/scripts/sidebar/instant.filter.js'),
-            path.resolve('./vendor/ibexa/admin-ui-assets/src/bundle/Resources/public/vendors/leaflet/dist/leaflet.js'),
+            path.resolve('./vendor/se7enxweb/admin-ui-assets/src/bundle/Resources/public/vendors/leaflet/dist/leaflet.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.location.load.map.js'),
             path.resolve(__dirname, '../public/js/scripts/sidebar/btn/content.edit.js'),
             path.resolve(__dirname, '../public/js/scripts/sidebar/btn/content.hide.js'),
@@ -195,7 +195,7 @@ module.exports = (Encore) => {
         .addEntry('ibexa-admin-ui-url-wildcards-list-js', [path.resolve(__dirname, '../public/js/scripts/admin.urlwildcards.list.js')])
         .addEntry('ibexa-admin-ui-change-user-password-js', [path.resolve(__dirname, '../public/js/scripts/user_password.change.js')])
         .addEntry('ibexa-admin-ui-content-edit-parts-js', [
-            path.resolve('./vendor/ibexa/admin-ui-assets/src/bundle/Resources/public/vendors/leaflet/dist/leaflet.js'),
+            path.resolve('./vendor/se7enxweb/admin-ui-assets/src/bundle/Resources/public/vendors/leaflet/dist/leaflet.js'),
             path.resolve(__dirname, '../public/js/scripts/admin.content.edit.js'),
             path.resolve(__dirname, '../public/js/scripts/fieldType/base/base-field.js'),
             path.resolve(__dirname, '../public/js/scripts/fieldType/base/base-file-field.js'),

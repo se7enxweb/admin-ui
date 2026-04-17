@@ -19,7 +19,7 @@ use Symfony\Component\Process\Process;
 
 class CompileAssetsCommand extends Command implements BackwardCompatibleCommand
 {
-    public const COMMAND_NAME = 'ibexa:encore:compile';
+    public const COMMAND_NAME = 'exponential:encore:compile';
 
     public const COMMAND_DEFAULT_TIMEOUT = 300;
 
@@ -39,6 +39,7 @@ class CompileAssetsCommand extends Command implements BackwardCompatibleCommand
     {
         $this
             ->setAliases([
+                'ibexa:encore:compile',
                 'ezplatform:encore:compile',
             ])
             ->addOption(
@@ -128,7 +129,7 @@ class CompileAssetsCommand extends Command implements BackwardCompatibleCommand
      */
     public function getDeprecatedAliases(): array
     {
-        return ['ezplatform:encore:compile'];
+        return ['ibexa:encore:compile', 'ezplatform:encore:compile'];
     }
 }
 
